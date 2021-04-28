@@ -24,12 +24,12 @@ public class Config extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/service/*");
     }
 
-    @Bean(name = "employeesDetailsWsdl")
+    @Bean(name = "employees")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("EmployeeDetailsPort");
-        wsdl11Definition.setLocationUri("/service/employee-details");
-        wsdl11Definition.setTargetNamespace("http://api.cosmote.com/xml/employee");
+        wsdl11Definition.setPortTypeName("EmployeesPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace(EmployeeEndpoint.NAMESPACE_URI);
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }

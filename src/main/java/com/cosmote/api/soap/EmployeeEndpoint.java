@@ -1,10 +1,10 @@
 package com.cosmote.api.soap;
 
 import com.cosmote.api.model.Employee;
-import com.cosmote.api.rest.EmployeeRepository;
-import com.cosmote.api.xml.employee.EmployeeDetailsRequest;
-import com.cosmote.api.xml.employee.EmployeeDetailsResponse;
-import java.util.Optional;
+import com.cosmote.api.xjc.EmployeeType;
+import com.cosmote.api.xjc.GetEmployeeByIdRequest;
+import com.cosmote.api.xjc.GetEmployeeByIdResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -14,29 +14,26 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class EmployeeEndpoint {
 
-    private static final String NAMESPACE_URI = "http://api.cosmote.com/xml/employee";
+    public static final String NAMESPACE_URI = "http://api.cosmote.com/xml/employee";
 
-    private EmployeeRepository employeeRepository;
+    private EmployeeEntityService employeeEntityService;
 
-    @Autowired
-    public EmployeeEndpoint(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeEndpoint() {
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EmployeeDetailsRequest")
+    @Autowired
+    public EmployeeEndpoint(EmployeeEntityService employeeEntityService) {
+        this.employeeEntityService = employeeEntityService;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeByIdRequest")
     @ResponsePayload
-    public EmployeeDetailsResponse getStudent(@RequestPayload EmployeeDetailsRequest request) {
-        EmployeeDetailsResponse response = new EmployeeDetailsResponse();
-        Optional<Employee> o = this.employeeRepository.findById(request.getId());
-        if (o.isPresent()) {
-            com.cosmote.api.xml.employee.Employee employee = new com.cosmote.api.xml.employee.Employee();
-            employee.setId(o.get().getId());
-            employee.setName(o.get().getName());
-            employee.setEmail(o.get().getEmail());
-            response.setEmployee(employee);
-        } else {
-            response.setEmployee(null);
-        }
+    public GetEmployeeByIdResponse getStudent(@RequestPayload GetEmployeeByIdRequest request) {
+        GetEmployeeByIdResponse response = new GetEmployeeByIdResponse();
+        Employee employee = this.employeeEntityService.getEntityById(request.getEmployeeid());
+        EmployeeType employeeType = new EmployeeType();
+        BeanUtils.copyProperties(employee, employeeType);
+        response.setEmployeeType(employeeType);
         return response;
     }
 
