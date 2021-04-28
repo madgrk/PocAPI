@@ -19,7 +19,7 @@
     </xs:element>
     <xs:complexType name="EmployeeType">
         <xs:sequence>
-            <xs:element name="employeeId" type="xs:long" />
+            <xs:element name="Id" type="xs:long" />
             <xs:element name="name" type="xs:string" />
             <xs:element name="email" type="xs:string" />
         </xs:sequence>
