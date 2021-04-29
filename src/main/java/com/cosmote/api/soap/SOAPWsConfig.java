@@ -9,12 +9,14 @@ import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
+import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
+import org.springframework.ws.wsdl.wsdl11.Wsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
-public class Config extends WsConfigurerAdapter {
+public class SOAPWsConfig extends WsConfigurerAdapter {
 
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -24,18 +26,19 @@ public class Config extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-    @Bean(name = "employees")
+    @Bean(name = "EmployeeService")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("EmployeesPort");
-        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setPortTypeName("EmployeePort");
+        wsdl11Definition.setCreateSoap11Binding(true);
+        wsdl11Definition.setLocationUri("/ws/EmployeeService");
         wsdl11Definition.setTargetNamespace(EmployeeEndpoint.NAMESPACE_URI);
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }
-
+    
     @Bean
     public XsdSchema employeesSchema() {
         return new SimpleXsdSchema(new ClassPathResource("employees.xsd"));
-    }
+   }
 }

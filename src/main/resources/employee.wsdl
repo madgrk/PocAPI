@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="EmployeeSchema" 
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"  
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://localhost:8080/ws/EmployeeService"
+             targetNamespace="http://localhost:8080/ws/EmployeeService">
+
+    <types>
+        <xs:schema targetNamespace="http://localhost:8080/ws/EmployeeService">
+            <xs:complexType name="statusCode">
+                <xs:sequence>
+                    <xs:element name="code" type="xs:long" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeType">
+                <xs:all>
+                    <xs:element name="id" type="xs:long" />
+                    <xs:element name="name" type="xs:string" />
+                    <xs:element name="email" type="xs:string" />
+                </xs:all>
+            </xs:complexType>
+            <xs:complexType name="EmployeeTypes">
+                <xs:sequence>
+                    <xs:element type="tns:EmployeeType" minOccurs="0" maxOccurs="unbounded" name="employees" />
+                </xs:sequence>
+            </xs:complexType>
+            
+            <xs:element name="getAllEmployeesRequest">
+                <xs:complexType />
+            </xs:element>
+            
+            <xs:element name="getAllEmployeesResponse">
+                <xs:complexType>
+                    <xs:element name="EmployeeType" type="tns:EmployeeTypes" maxOccurs="unbounded"/>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="employeeFault" type="xs:string" />
+        </xs:schema>
+    </types>
+
+    <message name="employeeFault">
+        <part name="params" element="tns:employeeFault" />
+    </message>
+    <message name="getEmployessRequestMsg">
+        <part name="params" element="tns:getAllEmployeesRequest" />
+    </message>
+    <message name="getEmployessResponseMsg">
+        <part name="params" element="tns:getAllEmployeesResponse" />
+    </message>
+    
+    <portType name="EmployeesServicePortType">
+        <operation name="getAllEmployeesRequest">
+            <input message="tns:getAllEmployeesRequest" />
+            <output message="tns:getAllEmployeesResponse" />
+            <fault name="fault" message="tns:employeeFault" />
+        </operation>
+    </portType>
+    
+    <binding name="employeesServiceSOAPBinding" type="tns:EmployeesServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <operation name="getAllEmployees">
+            <soap:operation soapAction="getAllEmployees" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="fault">
+                <soap:fault name="fault" use="literal" />
+            </fault>
+        </operation>
+    </binding>
+
+    <service name="EmployeeService">
+        <port name="EmployeesServicePortType" binding="tns:employeesServiceSOAPBinding">
+            <soap:address location="http://localhost:8080/ws/EmployeeService" />
+        </port>
+    </service>
+</definitions>

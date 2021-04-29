@@ -133,13 +133,12 @@
                             <sources>
                                 <source>${project.basedir}/src/main/resources/employees.xsd</source>
                             </sources>
-                            <xjbSources>
-                                <source>${project.basedir}/src/main/resources/employees.xsd</source>
-                            </xjbSources>
+                            <sourceType>xmlschema</sourceType>
                             <packageName>com.cosmote.api.xjc</packageName>
+                            <strict>false</strict>
                         </configuration>
                     </execution>
-<!--                    <execution>
+                    <execution>
                         <phase>generate-sources</phase>
                         <id>xjc-schema2</id>
                         <goals>
@@ -149,14 +148,44 @@
                             <sources>
                                 <source>${project.basedir}/src/main/resources/generic.wsdl</source>
                             </sources>
-                            <xjbSources>
-                                <source>${project.basedir}/src/main/resources/generic.wsdl</source>
-                            </xjbSources>
                             <sourceType>wsdl</sourceType>
+                            <strict>false</strict>
                             <packageName>com.cosmote.api.generic.xjc</packageName>
                             <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
                         </configuration>
-                    </execution>-->
+                    </execution>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <id>xjc-schema3</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/main/resources/tutorial.wsdl</source>
+                            </sources>
+                            <sourceType>wsdl</sourceType>
+                            <strict>false</strict>
+                            <packageName>com.cosmote.api.tutorial.xjc</packageName>
+                            <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <id>xjc-schema4</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/main/resources/employee.wsdl</source>
+                            </sources>
+                            <sourceType>wsdl</sourceType>
+                            <strict>false</strict>
+                            <packageName>com.cosmote.api.employee.xjc</packageName>
+                            <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
+                        </configuration>
+                    </execution>
                 </executions>
                 <configuration>
                     <outputDirectory>${project.basedir}/src/main/java</outputDirectory>

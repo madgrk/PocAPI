@@ -87,7 +87,9 @@ public class ApiError {
     }
 
     /**
-     * Utility method for adding error of ConstraintViolation. Usually when a @Validated validation fails.
+     * Utility method for adding error of ConstraintViolation. Usually when a
+     *
+     * @Validated validation fails.
      *
      * @param cv the ConstraintViolation
      */

@@ -2,6 +2,27 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://api.cosmote.com/xml/employees"
            targetNamespace="http://api.cosmote.com/xml/employees" elementFormDefault="qualified">
  
+    <xs:complexType name="EmployeeType">
+        <xs:all>
+            <xs:element name="id" type="xs:long" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="email" type="xs:string" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="EmployeeTypes">
+        <xs:sequence>
+            <xs:element type="tns:EmployeeType" minOccurs="0" maxOccurs="unbounded" name="employees" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:element name="getEmployeeByIdRequest">
         <xs:complexType>
             <xs:sequence minOccurs="0" maxOccurs="1">
@@ -17,14 +38,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="EmployeeType">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long" />
-            <xs:element name="name" type="xs:string" />
-            <xs:element name="email" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-    
+
     <xs:element name="getAllEmployeesRequest">
         <xs:complexType/>
     </xs:element>    
@@ -34,14 +48,8 @@
                 <xs:element name="EmployeeType" type="tns:EmployeeType" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>   
-    <xs:complexType name="serviceStatus">
-        <xs:sequence>
-            <xs:element name="statusCode" type="xs:string"/>
-            <xs:element name="message" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>     
-    
+    </xs:element>
+      
     <xs:element name="addEmployeeRequest">
         <xs:complexType>
             <xs:sequence>
@@ -58,6 +66,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
     <xs:element name="updateEmployeeRequest">
         <xs:complexType>
             <xs:sequence>
@@ -74,6 +83,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
     <xs:element name="deleteEmployeeRequest">
         <xs:complexType>
             <xs:sequence minOccurs="0" maxOccurs="1">
@@ -85,8 +95,9 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="employeeFault" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
 </xs:schema>

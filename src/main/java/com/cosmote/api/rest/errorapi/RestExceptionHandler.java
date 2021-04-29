@@ -187,7 +187,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     //protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException ex) {
     //    return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, ex));
     //}
-
     /**
      * Handle DataIntegrityViolationException, inspects the cause for different
      * DB causes.
@@ -220,7 +219,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }
-    
+
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
