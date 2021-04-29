@@ -124,7 +124,7 @@
                 <version>2.5.0</version>
                 <executions>
                     <execution>
-                        <phase>generate-sources</phase>
+                        <phase>generate-resources</phase>
                         <id>xjc-schema1</id>
                         <goals>
                             <goal>xjc</goal>
@@ -139,7 +139,7 @@
                             <packageName>com.cosmote.api.xjc</packageName>
                         </configuration>
                     </execution>
-                    <execution>
+<!--                    <execution>
                         <phase>generate-sources</phase>
                         <id>xjc-schema2</id>
                         <goals>
@@ -154,8 +154,9 @@
                             </xjbSources>
                             <sourceType>wsdl</sourceType>
                             <packageName>com.cosmote.api.generic.xjc</packageName>
+                            <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
                         </configuration>
-                    </execution>
+                    </execution>-->
                 </executions>
                 <configuration>
                     <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
