@@ -1,4 +1,4 @@
-package com.cosmote.api.rest.errors;
+package com.cosmote.api.rest.errorapi;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;

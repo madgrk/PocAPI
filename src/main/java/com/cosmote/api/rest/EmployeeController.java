@@ -1,7 +1,7 @@
 package com.cosmote.api.rest;
 
 import com.cosmote.api.model.Employee;
-import com.cosmote.api.rest.errors.EntityNotFoundException;
+import com.cosmote.api.rest.errorapi.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;

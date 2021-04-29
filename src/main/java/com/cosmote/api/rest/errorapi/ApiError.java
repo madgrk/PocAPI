@@ -1,4 +1,4 @@
-package com.cosmote.api.rest.errors;
+package com.cosmote.api.rest.errorapi;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

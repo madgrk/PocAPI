@@ -5,7 +5,7 @@
     <xs:element name="getEmployeeByIdRequest">
         <xs:complexType>
             <xs:sequence minOccurs="0" maxOccurs="1">
-                <xs:element name="Employeeid" type="xs:long"/>
+                <xs:element name="id" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -19,7 +19,7 @@
     </xs:element>
     <xs:complexType name="EmployeeType">
         <xs:sequence>
-            <xs:element name="Id" type="xs:long" />
+            <xs:element name="id" type="xs:long" />
             <xs:element name="name" type="xs:string" />
             <xs:element name="email" type="xs:string" />
         </xs:sequence>
@@ -61,6 +61,7 @@
     <xs:element name="updateEmployeeRequest">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
                 <xs:element name="name" type="xs:string"/>
                 <xs:element name="email" type="xs:string"/>
             </xs:sequence>
@@ -76,7 +77,7 @@
     <xs:element name="deleteEmployeeRequest">
         <xs:complexType>
             <xs:sequence minOccurs="0" maxOccurs="1">
-                <xs:element name="EmployeeId" type="xs:long"/>
+                <xs:element name="id" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

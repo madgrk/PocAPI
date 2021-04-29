@@ -1,4 +1,4 @@
-package com.cosmote.api.rest.errors;
+package com.cosmote.api.rest.errorapi;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;

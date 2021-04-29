@@ -1,4 +1,4 @@
-package com.cosmote.api.rest.errors;
+package com.cosmote.api.rest.errorapi;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.cosmote.api.rest.errors;
+package com.cosmote.api.rest.errorapi;
 
 import java.util.HashMap;
 import java.util.Map;
